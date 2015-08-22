@@ -12,7 +12,7 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
 ## Installing the FTDI D2XX drivers on the Raspberry PI
 
 1. go to `\\[device-name]\c$\windows\system32`, login with the admin password of your PI if prompted
-2. copy [ftdi.d2xx.winrt.cat](lib\D2xx WinRT 1.0.2\driver\ftdi.d2xx.winrt.cat) and [FTDI.D2xx.WinRT.inf](lib\D2xx WinRT 1.0.2\driver\FTDI.D2xx.WinRT.inf) from [lib\D2xx WinRT 1.0.2\driver](lib\D2xx WinRT 1.0.2\driver) to the folder above
+2. copy [ftdi.d2xx.winrt.cat](lib/D2xx WinRT 1.0.2/driver/ftdi.d2xx.winrt.cat) and [FTDI.D2xx.WinRT.inf](lib/D2xx WinRT 1.0.2/driver/FTDI.D2xx.WinRT.inf) from [lib\D2xx WinRT 1.0.2\driver](lib/D2xx WinRT 1.0.2/driver) to the folder above
 3. start a remote powershell session to the Raspberry PI: 
  	- add the Raspberry PI to the TrustedHosts if you haven't already: `set-Item WSMan:\localhost\Client\TrustedHosts -Value [device-name]`
   	- start the session with:  `enter-pssession -computername [device-name] -credential [device-name]\administrator` 
@@ -26,7 +26,7 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
  1 matching device(s) found.
  ```
  
- **Note: the VID and PID need to match the model you are using, if you see `0 matching device(s) found.` your FTDI device might use a different VID/PID . For an overview of the default VIDs/PIDS per model see the `DeviceCapability` section in: [Package.appxmanifest](src\FTDISample\Package.appxmanifest) ** or look up the Hardware Id in the device manager on Windows.
+ **Note: the VID and PID need to match the model you are using, if you see `0 matching device(s) found.` your FTDI device might use a different VID/PID . For an overview of the default VIDs/PIDS per model see the `DeviceCapability` section in: [Package.appxmanifest](src/FTDISample/Package.appxmanifest) or look up the Hardware Id in the device manager on Windows.**
 
 ## Limitations
 
@@ -68,4 +68,4 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
     </Device>-->
 </DeviceCapability> 
 ```
-5. see the sample for how to use the library, more sample code can be found in the download from the FTDI site:  http://www.ftdichip.com/Drivers/D2XX.htm
+See the sample for how to use the library, more sample code can be found in the download from the FTDI site:  http://www.ftdichip.com/Drivers/D2XX.htm
