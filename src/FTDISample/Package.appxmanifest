@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="1f418741-4340-4eaa-88b8-2c6a00d225af"
+    Publisher="CN=jarkr_000"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="1f418741-4340-4eaa-88b8-2c6a00d225af" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>FTDISample</DisplayName>
+    <PublisherDisplayName>jarkr_000</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="FTDISample.App">
+      <uap:VisualElements
+        DisplayName="FTDISample"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="FTDISample"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <DeviceCapability Name="usb">
+      <!--FT232AM, FT232BM, FT232R and FT245R Devices-->
+      <Device Id="vidpid:0403 6001">
+        <Function Type="name:vendorSpecific" />
+      </Device>
+      <!--FT2232D and FT2232H Devices-->
+      <Device Id="vidpid:0403 6010">
+        <Function Type="name:vendorSpecific" />
+      </Device>
+      <!--FT4232H Device-->
+      <Device Id="vidpid:0403 6011">
+        <Function Type="name:vendorSpecific" />
+      </Device>
+      <!--FT232H Device-->
+      <Device Id="vidpid:0403 6014">
+        <Function Type="name:vendorSpecific" />
+      </Device>
+      <!--FT-X-Series Devices-->
+      <Device Id="vidpid:0403 6015">
+        <Function Type="name:vendorSpecific" />
+      </Device>
+      <!--My Custom Device-->
+      <!--<Device Id="vidpid:1234 4321">
+          <Function Type="name:vendorSpecific" />
+        </Device>-->
+    </DeviceCapability>  
+  </Capabilities>
+</Package>

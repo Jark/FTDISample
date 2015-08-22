@@ -1,0 +1,101 @@
+﻿<Page
+    x:Class="FTDISample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FTDISample"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:FTDISample.Converters"
+    xmlns:helpers="using:FTDISample.Helpers"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:ExistenceToVisibilityConverter x:Key="ExistenceToVisibilityConverter" />
+            <converters:InvertedExistenceToVisibilityConverter x:Key="InvertedExistenceToVisibilityConverter" />
+            <converters:ReadBufferToStringConverter x:Key="ReadBufferToStringConverter" 
+                                               ShowInASCII="{Binding IsOn, ElementName=tsShowInASCII}" />
+            <Style TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="12,40,0,0" x:Name="MainGrid">
+        <StackPanel 
+            Orientation="Vertical" 
+            Visibility="{Binding DeviceConnection, Converter={StaticResource InvertedExistenceToVisibilityConverter}}">
+            <TextBlock Margin="0,0,4,0">Devices:</TextBlock>
+            <ItemsControl ItemsSource="{Binding Devices}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0,0,4,0" Text="{Binding}" VerticalAlignment="Center" />
+                            <Button Command="{Binding DataContext.SelectDeviceCommand, ElementName=MainGrid}" CommandParameter="{Binding}">Select</Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <Grid 
+            Visibility="{Binding DeviceConnection, Converter={StaticResource ExistenceToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Margin="0,0,4,0">Connection to:</TextBlock>
+                <TextBlock Text="{Binding DeviceConnection.DeviceNode}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Margin="0,0,4,0">Connection state:</TextBlock>
+                <TextBlock Text="{Binding DeviceConnection.State}" />
+            </StackPanel>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Margin="0,0,4,0">Write (ASCII + \r\n):</TextBlock>
+                <TextBox Margin="0,4" Grid.Row="0" Grid.Column="1" Name="txtASCIIToWrite" />
+                <Button Grid.Row="0" Grid.Column="2" Command="{Binding DeviceConnection.WriteASCIICommand}" CommandParameter="{Binding Text, ElementName=txtASCIIToWrite}">Write ASCII</Button>
+                <TextBlock Margin="0,0,4,0" Grid.Row="1" Grid.Column="0">Write bytes (enter in hex):</TextBlock>
+                <TextBox Margin="0,4" Grid.Row="1" Grid.Column="1" Name="txtBytesToWrite" />
+                <Button Grid.Row="1" Grid.Column="2" Command="{Binding DeviceConnection.WriteBytesCommand}" CommandParameter="{Binding Text, ElementName=txtBytesToWrite}">Write bytes</Button>
+            </Grid>
+            <Grid Grid.Row="3" Margin="0,0,0,12">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Text="Read buffer"></TextBlock>
+                <ToggleSwitch Grid.Row="0" Grid.Column="0" Margin="0,0,12,0"  HorizontalAlignment="Right" 
+                              OnContent="Show in ASCII" OffContent="Show in Hex" x:Name="tsShowInASCII" />                
+                <Border Grid.Row="2" Grid.Column="0" >
+                    <TextBox Margin="0,0,12,0" Padding="4" AcceptsReturn="True" IsReadOnly="True" TextWrapping="Wrap"
+                             Text="{Binding DeviceConnection.ReadBuffer, Converter={StaticResource ReadBufferToStringConverter}}"
+                             helpers:TextBoxUtilities.AlwaysScrollToEnd="True"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                </Border>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Log"></TextBlock>
+                <Border VerticalAlignment="Stretch"  Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" >
+                    <TextBox Margin="0,0,12,0" Padding="4" AcceptsReturn="True" IsReadOnly="True" TextWrapping="Wrap"
+                             Text="{Binding DeviceConnection.MessageLog}"
+                             helpers:TextBoxUtilities.AlwaysScrollToEnd="True"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

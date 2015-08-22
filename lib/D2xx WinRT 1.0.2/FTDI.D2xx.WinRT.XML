@@ -1,0 +1,2613 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>FTDI.D2xx.WinRT</name>
+    </assembly>
+    <members>
+        <member name="T:FTDI.D2xx.WinRT.Device.IChipId">
+            <summary>
+            Interface providing details of the FTDI Chip-ID number.  Applies only to FT232R, 
+            FT245R and FT X-Series devices.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IChipId.GetId">
+            <summary>
+            Return the unique FTDI Chip-ID number for this device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.ChipId.GetId">
+            <summary>
+            Return the unique FTDI Chip-ID for this device.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.ChipId.CHIP_ID">
+            <summary>
+            Low and high word locations of the chip ID words within the device EEPROM.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.GetEepromSize(System.UInt16)">
+            <summary>
+            Read the eeprom location that stores the eeprom type to get the size.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.GetBlankEepromSize">
+             <summary>
+             If this is a blank eeprom use this algorithm to work out what type it is.
+            
+             The EEPROM may be blank or it doesn't have an EEPROM connected.
+             Writes 0xC0 (1100 0000 BIN) into location 0xC0 of the EEPROM...
+             If the EEPROM is type 46 (64 word locations) the leading 2 bits will be dropped...
+             resulting in 0xC0 being written in location 00 0000 BIN.
+             If the EEPROM is type 56 (128 word locations) the leading bit will be dropped...
+             resulting in 0xC0 being written in location 100 0000 BIN.
+             If the EERPOM is type 66 (256 word locations) 0xC0 will be written in the.. 
+             correct location 1100 0000 BIN.
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.Read(System.UInt16[])">
+            <summary>
+            Read the contents of this EEPROM
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.Read(System.UInt16[],System.UInt16,System.UInt16)">
+            <summary>
+            Reads a portion of the device EEPROM.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.WriteEeprom(System.UInt16[],System.UInt16,System.UInt16)">
+            <summary>
+            Reads a portion of the device EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.EepromConnected">
+            <summary>
+            Returns true if the device has an EEPROM connected.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.EepromData">
+            <summary>
+            Returns the raw device EEPROM contents.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.EepromSize">
+            <summary>
+            Returns the size of the connected EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.EepromBlank">
+            <summary>
+            Returns true if the EEPROM is blank.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.DeviceEEPROM.EEPROM_TYPE">
+            <summary>
+            EEPROM types.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D.DEVICE_INTERFACE">
+            <summary>
+            FT2232D device interfaces
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D.DEVICE_INTERFACE.UART">
+            <summary>
+            UART mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D.DEVICE_INTERFACE.FIFO">
+            <summary>
+            FIFO 245 mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D.DEVICE_INTERFACE.FIFO_CPU_Target">
+            <summary>
+            FIFO CPU style interface.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D.DEVICE_INTERFACE.FIFO_OPTO_ISOLATE">
+            <summary>
+            FIFO mode to optically isolate an external device from USB.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM">
+            <summary>
+            Class that represents the EEPROM of an FT2232D device.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM">
+            <summary>
+            Interface that represents the contents of a generic FTDI device EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.A_DeviceInterface">
+            <summary>
+            Channel A - Device interface type
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.A_HighIO">
+            <summary>
+            Channel A - High drive level on UART and FIFO IO signals
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.A_LoadVCP">
+            <summary>
+            Channel A - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.B_DeviceInterface">
+            <summary>
+            Channel B - Device interface type
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.B_HighIO">
+            <summary>
+            Channel B - High drive level on UART and FIFO IO signals
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232D_EEPROM.B_LoadVCP">
+            <summary>
+            Channel B - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DRIVE_CURRENT">
+            <summary>
+            Device IO drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DRIVE_CURRENT.DRIVE_4mA">
+            <summary>
+            4mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DRIVE_CURRENT.DRIVE_8mA">
+            <summary>
+            8mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DRIVE_CURRENT.DRIVE_12mA">
+            <summary>
+            12mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DRIVE_CURRENT.DRIVE_16mA">
+            <summary>
+            16mA drive current.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DEVICE_INTERFACE">
+            <summary>
+            Device interface mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DEVICE_INTERFACE.UART">
+            <summary>
+            UART mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DEVICE_INTERFACE.FIFO">
+            <summary>
+            FIFO 245 mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DEVICE_INTERFACE.FIFO_CPU_Target">
+            <summary>
+            FIFO CPU style interface.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H.DEVICE_INTERFACE.FIFO_OPTO_ISOLATE">
+            <summary>
+            FIFO mode to optically isolate an external device from USB.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM">
+            <summary>
+            Class that represents the contents of an FT2232H EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.PowerSaveEnable">
+            <summary>
+            Power Save Enable - When the FT2232H is used in self powered mode this 
+            feature prevents forcing current down the USB lines when the host or hub is
+            powered off. 
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.SuspendDBus7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.A_DeviceInterface">
+            <summary>
+            Channel A - Device interface type
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.A_LoadVCP">
+            <summary>
+            Channel A - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.B_DeviceInterface">
+            <summary>
+            Channel B - Device interface type
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.B_LoadVCP">
+            <summary>
+            Channel B - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AC_DriveCurrent">
+            <summary>
+            AC Bus - Drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AC_SchmittInput">
+            <summary>
+            AC Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AC_SlowSlew">
+            <summary>
+            AC Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AD_DriveCurrent">
+            <summary>
+            AD Bus - Drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AD_SchmittInput">
+            <summary>
+            AD Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.AD_SlowSlew">
+            <summary>
+            AD Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BC_DriveCurrent">
+            <summary>
+            BC Bus - Drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BC_SchmittInput">
+            <summary>
+            BC Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BC_SlowSlew">
+            <summary>
+            BC Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BD_DriveCurrent">
+            <summary>
+            BD Bus - Drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BD_SchmittInput">
+            <summary>
+            BD Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT2232H_EEPROM.BD_SlowSlew">
+            <summary>
+            BD Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM">
+            <summary>
+            Class that represents the contents of an FT232AM EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232AM_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM">
+            <summary>
+            Class that represents the contents of an FT232BM EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232BM_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DRIVE_CURRENT">
+            <summary>
+            Device IO drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DRIVE_CURRENT.DRIVE_4mA">
+            <summary>
+            4mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DRIVE_CURRENT.DRIVE_8mA">
+            <summary>
+            8mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DRIVE_CURRENT.DRIVE_12mA">
+            <summary>
+            12mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DRIVE_CURRENT.DRIVE_16mA">
+            <summary>
+            16mA drive current.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS">
+            <summary>
+            FT232H CBus signals.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.TRISTATE">
+            <summary>
+            IO pad is tri-stated.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.RXLED">
+            <summary>
+            Receive data LED drive – pulses low when receiving data 
+            via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.TXLED">
+            <summary>
+            Transmit data LED drive – pulses low when transmitting 
+            data via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.TXRXLED">
+            <summary>
+            Transmit data LED drive – pulses low when transmitting 
+            data via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.PWREN">
+            <summary>
+            Output is low after the device has been configured by 
+            USB, then high during USB suspend mode. This output 
+            can be used to control power to external logic P-Channel 
+            logic level MOSFET switch. Enable the interface pull-down 
+            option when using the PWREN# in this way.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.SLEEP">
+            <summary>
+            Goes low during USB suspend mode. Typically used to 
+            power down an external TTL to RS232 level converter IC 
+            in USB to RS232 converter designs.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.DRIVE_0">
+            <summary>
+            Output a constant 0.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.DRIVE_1">
+            <summary>
+            Output a constant 1.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.GPIO_MODE">
+            <summary>
+            CBUS bit bang mode option. Allows up to 4 of the CBUS 
+            pins to be used as general purpose I/O. Configured 
+            individually for CBUS0, CBUS1, CBUS2 and CBUS3 in the 
+            internal MTP memory. 
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.TXDEN">
+            <summary>
+            Enable transmit data for RS485.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.CLK30MHZ">
+            <summary>
+            30 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.CLK15MHZ">
+            <summary>
+            15 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.CBUS_SIGNALS.CLK7_5MHZ">
+            <summary>
+            7.5 MHz Clock output.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE">
+            <summary>
+            FT232H device interfaces
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE.UART">
+            <summary>
+            UART mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE.FIFO">
+            <summary>
+            FIFO 245 mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE.FIFO_CPU_Target">
+            <summary>
+            FIFO CPU style interface.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE.FIFO_OPTO_ISOLATE">
+            <summary>
+            FIFO mode to optically isolate an external device from USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232H.DEVICE_INTERFACE.FT1248">
+            <summary>
+            FT1248 interface.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM">
+            <summary>
+            Class that represents the contents of an FT232H EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.DeviceInterface">
+            <summary>
+            Device interface type.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.LoadVCP">
+            <summary>
+            Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.PowerSaveEnable">
+            <summary>
+            Power Save Enable - When the FT2232H is used in self powered mode this 
+            feature prevents forcing current down the USB lines when the host or hub is
+            powered off. 
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AD_DriveCurrent">
+            <summary>
+            AD Bus - Drive current of IO pins.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AD_SchmittInput">
+            <summary>
+            AD Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AD_SlowSlew">
+            <summary>
+            AD Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AC_DriveCurrent">
+            <summary>
+            AC Bus - Drive current of IO pins.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AC_SchmittInput">
+            <summary>
+            AC Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.AC_SlowSlew">
+            <summary>
+            AC Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus0">
+            <summary>
+            CBus 0 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus1">
+            <summary>
+            CBus 1 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus2">
+            <summary>
+            CBus 2 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus3">
+            <summary>
+            CBus 3 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus4">
+            <summary>
+            CBus 4 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus5">
+            <summary>
+            CBus 5 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus6">
+            <summary>
+            CBus 6 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus7">
+            <summary>
+            CBus 7 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus8">
+            <summary>
+            CBus 8 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.CBus9">
+            <summary>
+            CBus 9 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.Suspend_BCBus7">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.FT1248_ClockPolarityHigh">
+            <summary>
+            FT1248 interface clock polarity.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.FT1248_FlowControlEnable">
+            <summary>
+            FT1248 flow control enable.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232H_EEPROM.FT1248_LSB">
+            <summary>
+            FT1248 Least Significant Byte first.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS">
+            <summary>
+            FT232R CBus signals.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.TXDEN">
+            <summary>
+            Enable transmit data for RS485.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.PWREN">
+            <summary>
+            Output is low after the device has been configured by 
+            USB, then high during USB suspend mode. This output can 
+            be used to control power to external logic P-Channel logic 
+            level MOSFET switch. Enable the interface pull-down 
+            option when using the PWREN# in this way.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.RXLED">
+            <summary>
+            Receive data LED drive: Data from FT232R to USB Host.
+            Pulses low when receiving data via USB. See Section 7.5
+            for more details.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.TXLED">
+            <summary>
+            Transmit data LED drive: Data from USB Host to 
+            FT232R. Pulses low when transmitting data via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.TXRXLED">
+            <summary>
+            LED drive – pulses low when transmitting or receiving data 
+            via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.SLEEP">
+            <summary>
+            Goes low during USB suspend mode. Typically used to 
+            power down an external TTL to RS232 level converter IC 
+            in USB to RS232 converter designs.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.CLK48MHZ">
+            <summary>
+            48MHz ±0.7%  Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.CLK24MHZ">
+            <summary>
+            24 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.CLK12MHZ">
+            <summary>
+            12 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.CLK6MHZ">
+            <summary>
+            6 MHz ±0.7%  Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.IO_MODE">
+            <summary>
+            CBUS bit bang mode option. Allows up to 4 of the CBUS 
+            pins to be used as general purpose I/O. Configured 
+            individually for CBUS0, CBUS1, CBUS2 and CBUS3 in the 
+            internal EEPROM. A separate application note, AN232R-01, 
+            available from FTDI website (www.ftdichip.com) describes 
+            in more detail how to use CBUS bit bang mode.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.BITBANG_WR">
+            <summary>
+            Synchronous and asynchronous bit bang mode WR# 
+            strobe output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT232R.CBUS_SIGNALS.BITBANG_RD">
+            <summary>
+            Synchronous and asynchronous bit bang mode RD# strobe 
+            output.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM">
+            <summary>
+            Class that represents the contents of an FT232R device EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.ExternalOscillatorEnable">
+            <summary>
+            If the design has an external oscillator fitted enable this property to turn the internal oscillator off.
+            Warning: enabling this option without an external oscillator fitted will render the device unusable.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.HighIO">
+            <summary>
+            High drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.LoadVCP">
+            <summary>
+            D2xx driver will expose the Virtual COM Port (VCP) layer.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.CBus0">
+            <summary>
+            CBus0 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.CBus1">
+            <summary>
+            CBus1 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.CBus2">
+            <summary>
+            CBus2 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.CBus3">
+            <summary>
+            CBus3 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.CBus4">
+            <summary>
+            CBus4 signal
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertDCD">
+            <summary>
+            Invert DCD UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertDSR">
+            <summary>
+            Invert DSR UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertDTR">
+            <summary>
+            Invert DTR UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertRI">
+            <summary>
+            Invert RI UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertRTS">
+            <summary>
+            Invert RTS UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertCTS">
+            <summary>
+            Invert CTS UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertRXD">
+            <summary>
+            Invert RXD UART line
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT232R_EEPROM.InvertTXD">
+            <summary>
+            Invert TXD UART line
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM">
+            <summary>
+            Class that represents the contents of an FT245R device EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.ExternalOscillatorEnable">
+            <summary>
+            If the design has an external oscillator fitted enable this property to turn the internal oscillator off.
+            Warning: enabling this option without an external oscillator fitted will render the device unusable.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.HighIO">
+            <summary>
+            High drive current of IO lines.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT245R_EEPROM.LoadVCP">
+            <summary>
+            D2xx driver will expose the Virtual COM Port (VCP) layer.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H.DRIVE_CURRENT">
+            <summary>
+            Device IO drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H.DRIVE_CURRENT.DRIVE_4mA">
+            <summary>
+            4mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H.DRIVE_CURRENT.DRIVE_8mA">
+            <summary>
+            8mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H.DRIVE_CURRENT.DRIVE_12mA">
+            <summary>
+            12mA drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H.DRIVE_CURRENT.DRIVE_16mA">
+            <summary>
+            16mA drive current.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM">
+            <summary>
+            Class that represents the contents of an FT4232H EEPROM.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.PowerSaveEnable">
+            <summary>
+            Power Save Enable - When the FT2232H is used in self powered mode this 
+            feature prevents forcing current down the USB lines when the host or hub is
+            powered off. 
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.A_DriveCurrent">
+            <summary>
+            Channel A - Drive current.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.A_LoadVCP">
+            <summary>
+            Channel A - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.A_RI_RS485_TXDEN">
+            <summary>
+            Channel A - Ring Indicator used as TXDEN for RS485.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.A_SchmittInput">
+            <summary>
+            Channel A - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.A_SlowSlew">
+            <summary>
+            Channel A - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.B_DriveCurrent">
+            <summary>
+            Channel B - Drive current.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.B_LoadVCP">
+            <summary>
+            Channel B - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.B_RI_RS485_TXDEN">
+            <summary>
+            Channel B - Ring Indicator used as TXDEN for RS485.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.B_SchmittInput">
+            <summary>
+            Channel B - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.B_SlowSlew">
+            <summary>
+            Channel B - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.C_DriveCurrent">
+            <summary>
+            Channel C - Drive current.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.C_LoadVCP">
+            <summary>
+            Channel C - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.C_RI_RS485_TXDEN">
+            <summary>
+            Channel C - Ring Indicator used as TXDEN for RS485.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.C_SchmittInput">
+            <summary>
+            Channel C - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.C_SlowSlew">
+            <summary>
+            Channel C - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.D_DriveCurrent">
+            <summary>
+            Channel D - Drive current.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.D_LoadVCP">
+            <summary>
+            Channel D - Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.D_RI_RS485_TXDEN">
+            <summary>
+            Channel D - Ring Indicator used as TXDEN for RS485.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.D_SchmittInput">
+            <summary>
+            Channel D - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FT4232H_EEPROM.D_SlowSlew">
+            <summary>
+            Channel D - Slow slew rate.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.DRIVE_CURRENT">
+            <summary>
+            FT X-Series drive current.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.DRIVE_CURRENT.DRIVE_4mA">
+            <summary>
+            Drive strength 4mA.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.DRIVE_CURRENT.DRIVE_8mA">
+            <summary>
+            Drive strength 8mA.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.DRIVE_CURRENT.DRIVE_12mA">
+            <summary>
+            Drive strength 12mA.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.DRIVE_CURRENT.DRIVE_16mA">
+            <summary>
+            Drive strength 16mA.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS">
+            <summary>
+            FT X-Series CBus signals.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.TRISTATE">
+            <summary>
+            IO pad is tri-stated.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.RXLED">
+            <summary>
+            Receive data LED drive – pulses low when receiving data 
+            via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.TXLED">
+            <summary>
+            Transmit data LED drive – pulses low when transmitting 
+            data via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.TXRXLED">
+            <summary>
+            LED drive – pulses low when transmitting or receiving 
+            data via USB.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.PWREN">
+            <summary>
+            Output is low after the device has been configured by 
+            USB, then high during USB suspend mode. This output 
+            can be used to control power to external logic P-Channel 
+            logic level MOSFET switch. Enable the interface pull-down 
+            option when using the PWREN# in this way.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.SLEEP">
+            <summary>
+            Goes low during USB suspend mode. Typically used to 
+            power down an external TTL to RS232 level converter IC 
+            in USB to RS232 converter designs.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.DRIVE_0">
+            <summary>
+            Output a constant 0.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.DRIVE_1">
+            <summary>
+            Output a constant 1.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.GPIO_MODE">
+            <summary>
+            CBUS bit bang mode option. Allows up to 4 of the CBUS 
+            pins to be used as general purpose I/O. Configured 
+            individually for CBUS0, CBUS1, CBUS2 and CBUS3 in the 
+            internal MTP memory. 
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.TXDEN">
+            <summary>
+            Enable transmit data for RS485.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.CLK24MHZ">
+            <summary>
+            24 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.CLK12MHZ">
+            <summary>
+            12 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.CLK6MHZ">
+            <summary>
+            6 MHz Clock output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.BCD_CHARGE">
+            <summary>
+            Battery charge Detect, indicates when the device is 
+            connected to a dedicated battery charger host. Active 
+            high output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.BCD_CHARGE_N">
+            <summary>
+            Inverse of BCD Charger.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.I2C_TXE">
+            <summary>
+            Transmit buffer empty, used to indicate to I2C master device status 
+            of the FT200XD transmit buffer.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.I2C_RXF">
+            <summary>
+            Receive buffer full, used to indicate to I2C master device status of 
+            FT200XD receive buffer
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.VBUS_SENSE">
+            <summary>
+            Input to detect when VBUS is present.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.BITBANG_WR">
+            <summary>
+            Synchronous and asynchronous bit bang mode WR# 
+            strobe output.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.BITBANG_RD">
+            <summary>
+            Synchronous and asynchronous bit bang mode RD# 
+            strobe output. 
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.TIME_STAMP">
+            <summary>
+            Toggle signal which changes state each time a USB 
+            SOF is received
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries.CBUS_SIGNALS.KEEP_AWAKE">
+            <summary>
+            Prevents the device from entering suspend state 
+            when unplugged. 
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM">
+            <summary>
+            Class that represents the EEPROM of an FT X-Series devices.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.SerialNumberEnable">
+            <summary>
+            Enable the serial number on this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.SerialNumber">
+            <summary>
+            Serial number string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.Manufacturer">
+            <summary>
+            Manufacturer string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.Product">
+            <summary>
+            Product description string descriptor.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.VendorID">
+            <summary>
+            Device Vendor ID (VID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.ProductID">
+            <summary>
+            Device Product ID (PID).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.PullDownEnable">
+            <summary>
+            Pull down enable in USB suspend.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.RemoteWakeupEnable">
+            <summary>
+            Remote wakeup enable.  Allow the device to wake the machine from a low power state.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.MaxPower">
+            <summary>
+            USB max power.  The max current that this device can draw from the USB port (500mA max).
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.SelfPowered">
+            <summary>
+            Self powered device.  This device must provide its own power source and cannot rely on USB power.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.UsbVersion">
+            <summary>
+            The USB revision number.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AD_DriveCurrent">
+            <summary>
+            AD Bus - Drive current of IO pins.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AD_SchmittInput">
+            <summary>
+            AD Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AD_SlowSlew">
+            <summary>
+            AD Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AC_DriveCurrent">
+            <summary>
+            AC Bus - Drive current of IO pins.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AC_SchmittInput">
+            <summary>
+            AC Bus - Schmitt trigger input.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.AC_SlowSlew">
+            <summary>
+            AC Bus - Slow slew rate.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.BCD_Enable">
+            <summary>
+            Enable battery charge detection feature.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.BCD_DeactivateSleep">
+            <summary>
+            Battery charge detection deactivate sleep.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.BCD_ForceCBusPowerEnable">
+            <summary>
+            Battery charge detection CBus power enable.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.I2C_DeviceID">
+            <summary>
+            I2C device ID.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.I2C_SlaveAddress">
+            <summary>
+            I2C slave address.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.I2C_DiableSchmitt">
+            <summary>
+            I2C disable schmitt trigger.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.FT1248_ClockPolarityEnable">
+            <summary>
+            FT1248 clock polarity enable.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.FT1248_FlowControlEnable">
+            <summary>
+            FT1248 flow control enable
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.FT1248_LSB">
+            <summary>
+            FT1248 bit order.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertCTS">
+            <summary>
+            Invert CTS UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertDCD">
+            <summary>
+            Invert DCD UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertDSR">
+            <summary>
+            Invert DSR UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertDTR">
+            <summary>
+            Invert DTR UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertRI">
+            <summary>
+            Invert RI UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertRTS">
+            <summary>
+            Invert RTS UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertRXD">
+            <summary>
+            Invert RXD UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.InvertTXD">
+            <summary>
+            Invert TXD UART line.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.RS485EchoSuppress">
+            <summary>
+            RS485 echo suppression.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.VBusSuspend">
+            <summary>
+            Input to detect when VBUS is present.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.LoadVCP">
+            <summary>
+            Load Virtual COM Port driver.  If true the D2xx driver layer will
+            expose the VCP layer of the driver.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus0">
+            <summary>
+            CBus 0 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus1">
+            <summary>
+            CBus 1 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus2">
+            <summary>
+            Cbus 2 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus3">
+            <summary>
+            CBus 3 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus4">
+            <summary>
+            CBus 4 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus5">
+            <summary>
+            CBus 5 signal.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.EEPROM.FTXSeries_EEPROM.CBus6">
+            <summary>
+            CBus 6 signal.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.EEPROM.USB_VERSION">
+            <summary>
+            USB Version
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.USB_VERSION.USB_20">
+            <summary>
+            USB 2.0
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.EEPROM.USB_VERSION.USB_11">
+            <summary>
+            USB 1.1
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.IFTDevice">
+            <summary>
+            Interface representing an FTDI device connected to the system, containing 
+            methods for communicating with the device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.Close">
+            <summary>
+            Closes the handle to the current IFTDevice.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.ResetAsync">
+            <summary>
+            Reset the current device.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetBaudRateAsync(System.UInt32)">
+            <summary>
+            Sets the baud rate for the device.
+            </summary>
+            <param name="baudRate">Baud rate</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetBaudRate">
+            <summary>
+            Gets the baud rate for the device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetFlowControlAsync(FTDI.D2xx.WinRT.Device.FLOW_CONTROL,System.Byte,System.Byte)">
+            <summary>
+            Sets the flow control for the device.
+            </summary>
+            <param name="flowCtrl">Must be one of the values within <see cref="T:FTDI.D2xx.WinRT.Device.FLOW_CONTROL" />.</param>
+            <param name="xOn">Character used to signal XOn.  Only used if flow control is FT_FLOW_XON_XOFF</param>
+            <param name="xOff">Character used to signal XOff.  Only used if flow control is FT_FLOW_XON_XOFF</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetFlowControl">
+            <summary>
+            Returns the flow control for the device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetDataCharacteristicsAsync(FTDI.D2xx.WinRT.Device.WORD_LENGTH,FTDI.D2xx.WinRT.Device.STOP_BITS,FTDI.D2xx.WinRT.Device.PARITY)">
+            <summary>
+            Sets the data characteristics for the device.
+            </summary>
+            <param name="wordLength">Number of bits per word - must be FT_BITS_8 or FT_BITS_7.</param>
+            <param name="stopBits">Number of stop bits - must be FT_STOP_BITS_1 or FT_STOP_BITS_2.</param>
+            <param name="parity">Parity - must be FT_PARITY_NONE, FT_PARITY_ODD, FT_PARITY_EVEN, FT_PARITY_MARK or FT_PARITY SPACE</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetWordLength">
+            <summary>
+            Gets the number of bits per word.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetStopBits">
+            <summary>
+            Gets the number of stop bits.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetParity">
+            <summary>
+            Gets the parity bit.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetBreakOnAsync">
+            <summary>
+            Sets the BREAK condition for the device.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetBreakOffAsync">
+            <summary>
+            Resets the break condition for the device.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetTimeouts(System.UInt16,System.UInt16)">
+            <summary>
+            Sets the read and write timeouts for the device.
+            </summary>
+            <param name="readTimeout">Read timeout in milliseconds.</param>
+            <param name="writeTimeout">Write timeout in milliseconds.</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetDtrAsync">
+            <summary>
+            Sets the Data Terminal Ready (DTR) control signal.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.ClearDtrAsync">
+            <summary>
+            Clears the Data Terminal Ready (DTR) control signal.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetRtsAsync">
+            <summary>
+            Sets the Request To Send (RTS) control signal.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.ClearRtsAsync">
+            <summary>
+            Clears the Request To Send (RTS) control signal.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetModemStatus">
+            <summary>
+            Gets the modem status and line status from the device.
+            </summary>
+            <returns>The least significant byte of the return value holds the modem status. The line status is held in the 
+            second least significant byte of the return value.
+            The modem status is bit-mapped as follows: Clear To Send (CTS) = 0x10, Data Set Ready (DSR) = 0x20, 
+            Ring Indicator (RI) = 0x40, Data Carrier Detect (DCD) = 0x80.
+            The line status is bit-mapped as follows: Overrun Error (OE) = 0x02, Parity Error (PE) = 0x04, Framing 
+            Error (FE) = 0x08, Break Interrupt (BI) = 0x10.
+            </returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetQueueStatus">
+            <summary>
+            Gets the number of bytes in the receive queue.
+            </summary>
+            <returns>The number of bytes in the receive queue.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetBitModeAsync(FTDI.D2xx.WinRT.Device.BIT_MODE,System.Byte)">
+            <summary>
+            Enables different chip modes.
+            </summary>
+            <param name="mask">Required value for bit mode mask. This sets up which bits are inputs and 
+            outputs. A bit value of 0 sets the corresponding pin to an input, a bit 
+            value of 1 sets the corresponding pin to an output.
+            In the case of CBUS Bit Bang, the upper nibble of this value controls 
+            which pins are inputs and outputs, while the lower nibble controls which     
+            of the outputs are high and low.</param>
+            <param name="mode">Mode value. Can be one of the following:
+            <para>Reset</para>
+            <para>Asynchronous Bit Bang</para>
+            <para>MPSSE (FT2232, FT2232H, FT4232H and FT232H devices only)</para>
+            <para>Synchronous Bit Bang (FT232R, FT245R, FT2232, FT2232H, FT4232H and FT232H devices only)</para>
+            <para>MCU Host Bus Emulation Mode (FT2232, FT2232H, FT4232H and FT232H devices only)</para>
+            <para>Fast Opto-Isolated Serial Mode (FT2232, FT2232H, FT4232H and FT232H devices only)</para>
+            <para>CBUS Bit Bang Mode (FT232R and FT232H devices only) </para>
+            <para>Single Channel Synchronous 245 FIFO Mode (FT2232H and FT232H devices only)</para>
+            </param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetBitModeAsync">
+            <summary>
+            Gets the instantaneous value of the data bus.
+            </summary>
+            <returns>Instantaneous data bus value.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.SetLatencyTimerAsync(System.Byte)">
+            <summary>
+            Set the latency timer value in msecs.
+            </summary>
+            <param name="timer">Required value in milliseconds of latency timer.  Valid range
+            is 2 - 255.</param>
+            <returns>True on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.GetLatencyTimerAsync">
+            <summary>
+            Get the latency timer value.
+            </summary>
+            <returns>Latency timer value.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.Purge(System.Boolean,System.Boolean)">
+            <summary>
+            This function purges receive and transmit buffers in the device.
+            </summary>
+            <param name="purgeRx">Will purge receive buffer if true.</param>
+            <param name="purgeTx">Will purge transmit buffer if true.</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.ReadAsync(System.Byte[],System.UInt32)">
+            <summary>
+            Read data from the device.  The function will attempt to read 'bytesToRead' bytes from the device. 
+            The number of bytes in the receive queue can be determined with a call to GetQueueStatus().  The read
+            will finish either when 'bytesToRead' bytes have been read or a timeout has occurred.  The read timeout
+            can be specified with a call to SetTimeouts().  If a timeout does occur the function will return 0 bytes.
+            </summary>
+            <param name="buf">Buffer that receives data from the device.</param>
+            <param name="bytesToRead">Number of bytes to read from the device.</param>
+            <returns>The number of bytes read from the device.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.WriteAsync(System.Byte[],System.UInt32)">
+            <summary>
+            Write data to the device.  The function will attempt to write 'bytesToWrite' bytes from the device.  The 
+            write will complete either when the request has completed or a timeout has occured.  The write timeout 
+            can be specified with a call to SetTimouts().
+            </summary>
+            <param name="buf">Buffer that contains data to be written to the device.</param>
+            <param name="bytesToWrite">Number of bytes to write to the device.</param>
+            <returns>Returns the number of bytes that have successfully been written to the device.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.StopInTask">
+            <summary>
+            Stops the driver's IN task.  It can be used in situations 
+            where data is being received continuously, so that the device can be purged without more data being 
+            received.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.RestartInTask">
+            <summary>
+            Restarts the driver's IN task.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromReadWordAsync(System.UInt16)">
+            <summary>
+            Read a value from an EEPROM location.
+            </summary>
+            <param name="offset">EEPROM location to read from.</param>
+            <returns>Value read from the EEPROM.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromWriteWordAsync(System.UInt16,System.UInt16)">
+            <summary>
+            Write a word to an EEPROM location.
+            </summary>
+            <param name="offset">EEPROM location to write to.</param>
+            <param name="val">Unsigned 16-bit value to write.</param>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromReadAsync">
+            <summary>
+            Read the contents of the device EEPROM.
+            </summary>
+            <returns>Device EEPROM structure on success, null otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromProgramAsync(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM)">
+            <summary>
+            Program the contents of the device EEPROM.
+            </summary>
+            <param name="eeData">Class containing data to be programmed into the device EEPROM.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromEraseAsync">
+            <summary>
+            Erases the device's EEPROM contents.  Not applicable to FT232R, FT245R and X-Series devices.
+            </summary>
+            <returns>true on success, false otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromGetUserAreaSizeAsync">
+            <summary>
+            Gets the available size of the EEPROM user area.
+            </summary>
+            <returns>The available size.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromReadUserAreaAsync(System.UInt16[],System.UInt16)">
+            <summary>
+            Reads the contents of the EEPROM user area.
+            </summary>
+            <param name="data">Buffer to hold data read from the EEPROM user area.</param>
+            <param name="length">The number of bytes from the EEPROM to read.</param>
+            <returns>Byte[] containing user area contents.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.IFTDevice.EepromWriteUserAreaAsync(System.UInt16[],System.UInt16)">
+            <summary>
+            Writes the contents of data to the EEPROM user area.
+            </summary>
+            <param name="data">Buffer that contains the data to be written to the EEPROM user area.</param>
+            <param name="length">The number of bytes to write.</param>
+            <returns>Returns the number of bytes successfully written.</returns>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDevice.DeviceInfoNode">
+            <summary>
+            Device Information.  Interface containing identification details of this device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDevice.IsOpen">
+            <summary>
+            Returns true if the device has been opened, false otherwise.
+            </summary>
+            <returns>True if open, false otherwise.</returns>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDevice.ChipId">
+            <summary>
+            IChipId interface.  This interface can be used to return the unique FTDI Chip-ID from FT232R, FT245R and FT X-Series devices.
+            If the current chip does not support the FTDI Chip-ID feature then this function will return null.
+            </summary>
+            <returns>IChipID object or null.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.IsWithinValidRange(System.UInt32,System.UInt32,System.Double)">
+            <summary>
+            Determines whether the requested baud rate is within the 3% tolerance levels.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GetSubIntDivisor(System.Double)">
+            <summary>
+            Returns the following table:
+            Baud High hValue(7) hValue(6)  function
+                0        0         0        No add
+                0        0         1        Add 4/8
+                0        1         0        Add 2/8
+                0        1         1        Add 1/8
+                1        0         0        Add 3/8
+                1        0         1        Add 5/8
+                1        1         0        Add 6/8
+                1        1         1        Add 7/8
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GetEepromSize">
+            <summary>
+            Returns the size of the EEPROM connected to the current device.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.CheckDeviceEeprom">
+            <summary>
+            Determines whether the EEPROM contents are valid.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GetStringDescriptor(System.Int32,System.UInt16[])">
+            <summary>
+            Helper function to get a string descriptor from the raw EEPROM data.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GetUSBConfig(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM,System.UInt16)">
+            <summary>
+            Helper function to get the USB configuration descriptor settings from raw EEPROM data.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GetDeviceControl(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM,System.UInt16)">
+            <summary>
+            Helper function to get device control settings from raw EEPROM data.
+            </summary>
+            <param name="ee"></param>
+            <param name="dataRead"></param>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.SetUSBConfig(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM,System.UInt16@)">
+            <summary>
+            Helper function to set device control settings from the IFT_EEPROM class.
+            </summary>
+            <param name="ee"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.ParseEepromData(System.UInt16[])">
+            <summary>
+            Device specific method that parses the raw data from the device EEPROM to produce an
+            IFTDevice class.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.GenerateEepromData(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM)">
+            <summary>
+            Device specific method that generates raw EEPROM data based on the contents of an
+            IFTDevice class.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.ProgramEepromDataAsync(System.UInt16[])">
+            <summary>
+            Programs the raw data into the device EEPROM and calculates the new checksum.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTDevice.FindUserAreaStart">
+            <summary>
+            Returns the index of the first byte of the user area.  This would be one word after the last string
+            descriptor.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.FTHiSpeedDevice">
+            <summary>
+            Abstract class representing a High Speed FTDI device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FT232AM.FT232AM.FindUserAreaStart">
+            <summary>
+            Returns the index of the first byte of the user area.  This would be one word after the last string
+            descriptor.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FT232H.FT232H.EepromProgramAsync(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM)">
+            <summary>
+            Programs the contents of eeData into the device EEPROM.
+            The protected area of the EEPROM must be read and included as part of the 
+            checksum calculations.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FT232R.FT232R.EepromEraseAsync">
+            <summary>
+            Cannot erase the EEPROM of the FT232R.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FT232R.FT232R.ProgramEepromDataAsync(System.UInt16[])">
+            <summary>
+            Programs the raw data into the device EEPROM and calculates the new checksum.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.FTDeviceInfoNode">
+            <summary>
+            Class containing information about a connected FTDI device.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode">
+            <summary>
+            Interface providing details of an FTDI device connected to the system.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.DeviceType">
+            <summary>
+            Enum value representing the device type.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.Manufacturer">
+            <summary>
+            USB Manufacturer Device Descriptor string.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.Description">
+            <summary>
+            USB Device Descriptor string.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.SerialNumber">
+            <summary>
+            Device serial number string.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.DeviceId">
+            <summary>
+            Unique string that identifies an FTDI device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.IFTDeviceInfoNode.IsOpen">
+            <summary>
+            Returns the open state of the current device.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.FTDeviceInfoNode.Description">
+            <summary>
+            USB Device Descriptor string.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.FTDeviceInfoNode.SerialNumber">
+            <summary>
+            Device serial number string.
+            </summary>
+        </member>
+        <member name="P:FTDI.D2xx.WinRT.Device.FTDeviceInfoNode.DeviceId">
+            <summary>
+            Unique string that identifies an FTDI device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTXSeries.FTXSeries.EepromProgramAsync(FTDI.D2xx.WinRT.Device.EEPROM.IFT_EEPROM)">
+            <summary>
+            Programs the contents of eeData into the device EEPROM.
+            The protected area of the EEPROM must be read and included as part of the 
+            checksum calculations.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTXSeries.FTXSeries.ProgramEepromDataAsync(System.UInt16[])">
+            <summary>
+            Programs the raw data into the device EEPROM and calculates the new checksum.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.Device.FTXSeries.FTXSeries.EepromEraseAsync">
+            <summary>
+            Cannot erase the EEPROM of the X-Series devices.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.DEVICE_TYPE">
+            <summary>
+            FTDI device types.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT232AM">
+            <summary>
+            FT232AM device (single channel full speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT232BM">
+            <summary>
+            FT232BM device (single channel full speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT2232D">
+            <summary>
+            FT2232D device (dual channel full speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT232R">
+            <summary>
+            FT232R device (single channel full speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT245R">
+            <summary>
+            FT245R device (single channel full speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT2232H">
+            <summary>
+            FT2232H device (dual channel high speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT4232H">
+            <summary>
+            FT4232H device (quad channel high speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FT232H">
+            <summary>
+            FT232H device (single channel high speed).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.DEVICE_TYPE.FTXSeries">
+            <summary>
+            FT X-Series device (single channel full speed).
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.WORD_LENGTH">
+            <summary>
+            UART word length.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.WORD_LENGTH.BITS_7">
+            <summary>
+            7 bit data length.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.WORD_LENGTH.BITS_8">
+            <summary>
+            8 bit data length.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.FLOW_CONTROL">
+            <summary>
+            UART flow control.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.FLOW_CONTROL.NONE">
+            <summary>
+            No flow control.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.FLOW_CONTROL.RTS_CTS">
+            <summary>
+            RTS/CTS hardware flow control.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.FLOW_CONTROL.DTR_DSR">
+            <summary>
+            DTR/DSR hardware flow control.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.FLOW_CONTROL.XON_XOFF">
+            <summary>
+            XON/XOFF software flow control.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.STOP_BITS">
+            <summary>
+            UART stop bits.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.STOP_BITS.BITS_1">
+            <summary>
+            1 stop bit.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.STOP_BITS.BITS_2">
+            <summary>
+            2 stop bits.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.PARITY">
+            <summary>
+            UART parity bits.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.PARITY.NONE">
+            <summary>
+            No parity.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.PARITY.ODD">
+            <summary>
+            Odd parity.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.PARITY.EVEN">
+            <summary>
+            Even parity.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.PARITY.MARK">
+            <summary>
+            Mark parity (bit is always 1).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.PARITY.SPACE">
+            <summary>
+            Space parity (bit is always 0).
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.Device.BIT_MODE">
+            <summary>
+            FTDI bit modes.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.RESET">
+            <summary>
+            Reset bit mode (off).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.ASYNC_BITBANG">
+            <summary>
+            Asynchronous bit bang.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.MPSSE">
+            <summary>
+            MPSSE (FT2232D, FT2232H, FT4232H and FT232H only).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.SYNC_BITBANG">
+            <summary>
+            Synchronous bit bang (FT2232D, FT232R, FT4232H, FT232H and FT X-Series only).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.MCU_HOST">
+            <summary>
+            MPSSE CPU emulation (FT2232D, FT2232H, FT4232H and FT232H only).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.FAST_SERIAL">
+            <summary>
+            Fast serial mode (FT2232D, FT2232H and FT232H only).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.CBUS_BITBANG">
+            <summary>
+            CBus bit bang (FT232R, FT232H and FT X-Series only).
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.Device.BIT_MODE.SYNC_FIFO">
+            <summary>
+            Single channel synchronous FIFO (FT2232H port A and FT232H only).
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.FTManager">
+            <summary>
+            Management class for connected FTDI devices.  Allows you to enumerate and communicate with connected 
+            FTDI devices.
+            </summary>
+        </member>
+        <member name="F:FTDI.D2xx.WinRT.FTManager.FTDI_VID">
+            <summary>
+            Constant value of FTDI Vendor ID.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.#ctor">
+            <summary>
+            Default constructor for FTManager class.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.StartWatcher(Windows.Devices.Enumeration.DeviceWatcher)">
+            <summary>
+            Create a watcher for the specified VID and PID.
+            </summary>
+            <param name="ftWatcher">Device watcher.</param>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.OnDeviceRemoved(Windows.Devices.Enumeration.DeviceWatcher,Windows.Devices.Enumeration.DeviceInformationUpdate)">
+            <summary>
+            OnDeviceRemoved callback.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.DeviceRemoved(Windows.Devices.Enumeration.DeviceInformationUpdate)">
+            <summary>
+            Remove device from list of devices.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.Suspend">
+            <summary>
+            The application should call this when application execution is being suspended.
+            This will cause the appropriate driver objects to be disposed.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.Resume">
+            <summary>
+            This function must be called by the application on resumption following a suspend,
+            It is responsible for re starting the appropriate list of USB Device watchers.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.OnDeviceAdded(Windows.Devices.Enumeration.DeviceWatcher,Windows.Devices.Enumeration.DeviceInformation)">
+            <summary>
+            OnDeviceAdded callback.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.DeviceAdded(Windows.Devices.Enumeration.DeviceInformation)">
+            <summary>
+            Called when a new FTDI device is added to the system.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.GetStringDescriptors(FTDI.D2xx.WinRT.USB.ControlRequest,FTDI.D2xx.WinRT.Device.FTDevice,FTDI.D2xx.WinRT.Device.FTDeviceInfoNode,System.String)">
+            <summary>
+            Gets the string descriptors for this device.
+            </summary>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.GetDeviceList">
+             <summary>
+             Returns a list of FTDI devices connected to the system.
+             </summary>
+             <returns>IList containing FTDeviceInfoNodes.</returns>
+             <example> This example shows how to access an FTDI device using the FTManager class.
+             <code>
+                FTManager ftManager = new FTManager();
+                var deviceList = ftManager.GetDeviceList();
+            
+                if (deviceList.Count &gt; 0)
+                {
+                    byte[] data = new byte[10];
+                    // Open a handle to the device.
+                    IFTDevice ftDevice = ftManager.OpenByDeviceID(deviceList[0].DeviceId);
+            
+                    await ftDevice.SetBaudRate(9600);
+                    await ftDevice.SetFlowControl(FLOW_CONTROL.RTS_CTS, 0, 0);
+                    // Write/Read some data.
+                    await ftDevice.Write(data, 10);
+                    ftDevice.Read(data, 10);
+                    // Close the device handle.
+                    ftDevice.Close();
+                }
+             </code>
+             </example>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.AddVIDPID(System.UInt32,System.UInt32)">
+            <summary>
+            Add a custom vendor ID/product ID combination to the list of allowed devices.
+            </summary>
+            <param name="vendorId">Device Vendor ID.</param>
+            <param name="productId">Device Product ID.</param>
+            <returns>True on success, false if the vendor ID/product ID combination is already in the list.</returns>
+            <example> This example shows how to add a custom VID and PID to the driver list.
+            <code>
+               uint myVid = 0x1234;
+               uint myPid = 0x4321;
+               
+               FTManager.AddVIDPID(myVid, myPid);
+               FTManager ftManager = new FTManager();
+            </code>
+            </example>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.RemoveVIDPID(System.UInt32,System.UInt32)">
+            <summary>
+            Remove a custom vendor ID/product ID combination from the list of allowed devices.
+            </summary>
+            <param name="vendorId">Device Vendor ID.</param>
+            <param name="productId">Device Product ID.</param>
+            <returns>True on success, false if the vendor ID/product ID combination was not found in the list.</returns>
+            <example> This example shows how to remove a standard FTDI VID and PID from the driver list.
+            <code>
+               uint rDeviceVid = 0x0403;
+               uint rDevicePid = 0x6001;
+               
+               FTManager.RemoveVIDPID(rDeviceVid, rDevicePid);
+               FTManager ftManager = new FTManager();
+            </code>
+            </example>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.IsFT232R(FTDI.D2xx.WinRT.USB.ControlRequest)">
+            <summary>
+            Reads location zero of the device EEPROM and determines whether the device is an FT232R or FT245R.
+            </summary>
+            <param name="control">Class used to perform control requests on the device.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.OpenByDescription(System.String)">
+            <summary>
+            Open a handle to the specified FTDI device.
+            </summary>
+            <param name="description">Device Descriptor for the device to be opened.</param>
+            <returns>The open FTDI device on success, null otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.OpenBySerialNumber(System.String)">
+            <summary>
+            Open a handle to the specified FTDI device.
+            </summary>
+            <param name="serialNumber">Serial Number for the device to be opened.</param>
+            <returns>The open FTDI device on success, null otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.OpenByDeviceID(System.String)">
+            <summary>
+            Open a handle to the specified FTDI device.
+            </summary>
+            <param name="id">Unique ID of the deivce to be opened.</param>
+            <returns>An open FTDI device on success, null otherwise.</returns>
+        </member>
+        <member name="M:FTDI.D2xx.WinRT.FTManager.GetLibraryVersion">
+            <summary>
+            Returns the version string of this library.
+            </summary>
+        </member>
+        <member name="T:FTDI.D2xx.WinRT.FTManager.FTDI_DEVICE_PIDS">
+            <summary>
+            Enumeration of FTDI Product IDs.
+            </summary>
+        </member>
+    </members>
+</doc>
