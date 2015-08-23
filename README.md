@@ -39,6 +39,7 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
 
 ## Setting up a new Windows Universal project using the D2XX
 **Note: you don't need to execute these instructions if you want to try the sample, this is just for a *new* project.**
+
 1. download the ARM Windows RT drivers http://www.ftdichip.com/Drivers/D2XX.htm (or look in the lib folder of this repository)
 2. copy `FTDI.D2xx.WinRT.USB.winmd`, `FTDI.D2xx.WinRT.winmd`, `FTDI.D2xx.WinRT.XML` to your lib folder
 3. in your new project add references to the files above
