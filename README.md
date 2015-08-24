@@ -11,7 +11,7 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
 
 ## Installing the FTDI D2XX drivers on the Raspberry PI
 
-1. go to `\\[device-name]\c$\windows\system32`, login with the admin password of your PI if prompted
+1. go to `\\[device-name]\c$\windows\system32`, login with username: `[device-name]\administrator` and the administrator password
 2. copy [ftdi.d2xx.winrt.cat](lib/D2xx WinRT 1.0.2/driver/ftdi.d2xx.winrt.cat) and [FTDI.D2xx.WinRT.inf](lib/D2xx WinRT 1.0.2/driver/FTDI.D2xx.WinRT.inf) from [lib\D2xx WinRT 1.0.2\driver](lib/D2xx WinRT 1.0.2/driver) to the folder above
 3. start a remote powershell (as administrator) session to the Raspberry PI: 
   - start the remote service: `net start WinRM`
