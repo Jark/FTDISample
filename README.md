@@ -17,6 +17,7 @@ This project uses the D2XX Windows RT driver from FTDI, see http://www.ftdichip.
   - start the remote service: `net start WinRM`
   - add the Raspberry PI to the TrustedHosts if you haven't already: `set-Item WSMan:\localhost\Client\TrustedHosts -Value [device-name]`
   - start the session with:  `enter-pssession -computername [device-name] -credential [device-name]\administrator` this can take up to 30 seconds or more, so be patient
+5. type `cd c:\windows\system32` to go to the folder where the drivers are located
 4. install the FTDI D2XX driver using the following command: `devcon.exe dp_add FTDI.D2xx.WinRT.inf`
 5. reboot the device: `shutdown /r /t 0`
 6. when rebooted reconnect again using last part of step 3
