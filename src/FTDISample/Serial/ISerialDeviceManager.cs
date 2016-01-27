@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FTDISample.Serial
 {
     public interface ISerialDeviceManager
     {
-        ISerialDevice OpenByDeviceId(string deviceId);
-        IEnumerable<DeviceNode> GetDeviceList();
+        Task<ISerialDevice> OpenByDeviceId(string deviceId);
+        Task<IEnumerable<DeviceNode>> GetDeviceList();
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FTDISample.Serial
@@ -7,6 +8,6 @@ namespace FTDISample.Serial
         Task SetConnectionSettings(DeviceConnection.ConnectionSettings connectionSettings);
         Task<uint> WriteAsync(byte[] bytesToWrite, uint nrBytesToWrite);
         uint GetQueueStatus();
-        Task<uint> ReadAsync(byte[] buffer, uint bytesInQueue);
+        Task<IEnumerable<byte>> ReadAsync(byte[] buffer, uint bytesInQueue);
     }
 }

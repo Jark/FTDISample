@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FTDI.D2xx.WinRT;
 
 namespace FTDISample.Serial
@@ -12,14 +13,14 @@ namespace FTDISample.Serial
         {
             ftManager = new FTManager();
         }
-        public ISerialDevice OpenByDeviceId(string deviceId)
+        public Task<ISerialDevice> OpenByDeviceId(string deviceId)
         {
-            return new FtdiSerialDevice(ftManager.OpenByDeviceID(deviceId));
+            return Task.FromResult<ISerialDevice>(new FtdiSerialDevice(ftManager.OpenByDeviceID(deviceId))) ;
         }
 
-        public IEnumerable<DeviceNode> GetDeviceList()
+        public Task<IEnumerable<DeviceNode>> GetDeviceList()
         {
-            return ftManager.GetDeviceList().Select(x => new DeviceNode(x));
+            return Task.FromResult(ftManager.GetDeviceList().Select(x => new DeviceNode(x.DeviceId, x.DeviceType.ToString())));
         }
     }
 }

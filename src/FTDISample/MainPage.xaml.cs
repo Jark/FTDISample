@@ -14,6 +14,7 @@ namespace FTDISample
         {
             InitializeComponent();
 
+            //var serialDeviceManager = new SerialDeviceManager();
             var serialDeviceManager = new FtdiSerialDeviceManager();
             DataContext = new FtdiSampleViewModel(serialDeviceManager);
         }

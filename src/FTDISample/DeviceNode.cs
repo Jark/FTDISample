@@ -1,30 +1,19 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using FTDI.D2xx.WinRT.Device;
-
-namespace FTDISample
+﻿namespace FTDISample
 {
-    public class DeviceNode : INotifyPropertyChanged
+    public class DeviceNode
     {
-        public DEVICE_TYPE DeviceType { get; }
-        public string DeviceId { get; }
+        public string Description { get; }
+        public string Id { get; }
 
-        public DeviceNode(IFTDeviceInfoNode device)
+        public DeviceNode(string id, string description)
         {
-            DeviceType = device.DeviceType;
-            DeviceId = device.DeviceId;
+            Id = id;
+            Description = description;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} ({1})", DeviceType, DeviceId);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return string.Format("{0} ({1})", Description, Id);
         }
     }
 }

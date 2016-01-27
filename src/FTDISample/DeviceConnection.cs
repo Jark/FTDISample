@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FTDI.D2xx.WinRT.Device;
+using Windows.Devices.SerialCommunication;
 using FTDISample.Helpers;
 using FTDISample.Serial;
 
@@ -40,7 +40,7 @@ namespace FTDISample
             private set { messageLog = value; OnPropertyChanged(); }
         }
 
-        public static ConnectionSettings DefaultSettings => new ConnectionSettings(38400, WORD_LENGTH.BITS_8, STOP_BITS.BITS_1, PARITY.NONE, FLOW_CONTROL.NONE);
+        public static ConnectionSettings DefaultSettings => new ConnectionSettings(38400, 8, SerialStopBitCount.One, SerialParity.None, SerialHandshake.None);
 
         public DeviceConnection(DeviceNode deviceNode, ISerialDevice device)
         {
@@ -135,8 +135,7 @@ namespace FTDISample
 
                     var buffer = new byte[bytesInQueue];
                     var bytesRead = await device.ReadAsync(buffer, bytesInQueue);
-                    if (bytesRead != 0)
-                        ReadBuffer = ReadBuffer.Concat(buffer.Take((int)bytesRead)).ToArray();
+                    ReadBuffer = ReadBuffer.Concat(bytesRead).ToArray();
                 }
                 catch (Exception ex)
                 {
@@ -154,28 +153,29 @@ namespace FTDISample
         public class ConnectionSettings
         {
             public uint BaudRate { get; }
-            public WORD_LENGTH WordLength { get; }
-            public STOP_BITS StopBits { get; }
-            public PARITY Parity { get; }
-            public FLOW_CONTROL FlowControl { get; }
+            public ushort DataBits { get; }
+            public SerialStopBitCount StopBits { get; }
+            public SerialParity Parity { get; }
+            public SerialHandshake Handshake { get; }
             public byte XOn { get; }
             public byte XOff { get; }
 
-            public ConnectionSettings(uint baudRate, WORD_LENGTH wordLength, STOP_BITS stopBits, PARITY parity,
-                                      FLOW_CONTROL flowControl, byte xOn = 0x00, byte xOff = 0x00)
+            public ConnectionSettings(uint baudRate, ushort dataBits, SerialStopBitCount stopBits, 
+                                      SerialParity parity, SerialHandshake handshake, 
+                                      byte xOn = 0x00, byte xOff = 0x00)
             {
                 BaudRate = baudRate;
-                WordLength = wordLength;
+                DataBits = dataBits;
                 StopBits = stopBits;
                 Parity = parity;
-                FlowControl = flowControl;
+                Handshake = handshake;
                 XOn = xOn;
                 XOff = xOff;
             }
 
             public override string ToString()
             {
-                return $"BaudRate={BaudRate}, WordLength={WordLength}, StopBits={StopBits}, Parity={Parity}, FlowControl={FlowControl}, XOn={XOn:X2}, XOff={XOff:X2}";
+                return $"BaudRate={BaudRate}, WordLength={DataBits}, StopBits={StopBits}, Parity={Parity}, FlowControl={Handshake}, XOn={XOn:X2}, XOff={XOff:X2}";
             }
         }
 
