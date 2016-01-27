@@ -5,14 +5,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Windows.UI.Xaml;
-using FTDI.D2xx.WinRT;
 using FTDISample.Helpers;
+using FTDISample.Serial;
 
 namespace FTDISample
 {
     public class FtdiSampleViewModel : INotifyPropertyChanged
     {
-        private readonly FTManager ftManager;
+        private readonly ISerialDeviceManager ftManager;
         private readonly DispatcherTimer deviceStatusWatcher;
         private DeviceNode selectedDevice;
         private readonly object locker = new object();
@@ -33,16 +33,16 @@ namespace FTDISample
             set { selectedDevice = value; OnPropertyChanged(); }
         }
 
-        public FtdiSampleViewModel()
+        public FtdiSampleViewModel(ISerialDeviceManager serialDeviceManager)
         {
-            ftManager = new FTManager();
+            ftManager = serialDeviceManager;
             SelectDeviceCommand = new DelegateCommand<DeviceNode>(OnSelectDevice);
 
             // for some reason the ftManager returns 0 devices at startup, so poll for new devices
             deviceStatusWatcher = new DispatcherTimer();
             deviceStatusWatcher.Tick += OnTick;
             deviceStatusWatcher.Interval = TimeSpan.FromMilliseconds(1000);
-            deviceStatusWatcher.Start();
+            deviceStatusWatcher.Start();            
         }
 
         private async void OnSelectDevice(DeviceNode deviceNode)
@@ -53,7 +53,7 @@ namespace FTDISample
                 if (DeviceConnection != null)
                     return;
 
-                var device = ftManager.OpenByDeviceID(deviceNode.DeviceId);
+                var device = ftManager.OpenByDeviceId(deviceNode.DeviceId);
                 newConnection = new DeviceConnection(deviceNode, device);
                 DeviceConnection = newConnection;
             }
@@ -64,12 +64,12 @@ namespace FTDISample
 
         private void OnTick(object sender, object e)
         {
-            var devicesList = ftManager.GetDeviceList();
-
+            var devicesList = ftManager.GetDeviceList().ToList();
+            
             // add devices we don't have yet
             var devicesToAdd = devicesList.Where(x => Devices.All(y => y.DeviceId != x.DeviceId)).ToList();
             foreach (var device in devicesToAdd)
-                Devices.Add(new DeviceNode(device));
+                Devices.Add(device);
 
             // remove any devices that are no longer connected
             var devicesToDelete = Devices.Where(x => devicesList.All(y => y.DeviceId != x.DeviceId)).ToList();

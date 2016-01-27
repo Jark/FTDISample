@@ -97,6 +97,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ReadBufferToStringConverter.cs" />
+    <Compile Include="Serial\FtdiSerialDevice.cs" />
+    <Compile Include="Serial\FtdiSerialDeviceManager.cs" />
     <Compile Include="Helpers\DelegateCommand.cs" />
     <Compile Include="DeviceConnection.cs" />
     <Compile Include="DeviceNode.cs" />
@@ -104,6 +106,8 @@
     <Compile Include="FtdiSampleViewModel.cs" />
     <Compile Include="Converters\InvertedExistenceToVisibilityConverter.cs" />
     <Compile Include="Helpers\TextBoxUtilities.cs" />
+    <Compile Include="Serial\ISerialDevice.cs" />
+    <Compile Include="Serial\ISerialDeviceManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

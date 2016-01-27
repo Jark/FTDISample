@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FTDI.D2xx.WinRT.Device;
 using FTDISample.Helpers;
+using FTDISample.Serial;
 
 namespace FTDISample
 {
     public class DeviceConnection : INotifyPropertyChanged
     {
         public DeviceNode DeviceNode { get; set; }
-        private readonly IFTDevice device;
+        private readonly ISerialDevice device;
         private ConnectionState state;
         private byte[] readBuffer;
         private string messageLog;
@@ -41,7 +42,7 @@ namespace FTDISample
 
         public static ConnectionSettings DefaultSettings => new ConnectionSettings(38400, WORD_LENGTH.BITS_8, STOP_BITS.BITS_1, PARITY.NONE, FLOW_CONTROL.NONE);
 
-        public DeviceConnection(DeviceNode deviceNode, IFTDevice device)
+        public DeviceConnection(DeviceNode deviceNode, ISerialDevice device)
         {
             DeviceNode = deviceNode;
             this.device = device;
@@ -58,9 +59,7 @@ namespace FTDISample
 
             try
             {
-                await device.SetBaudRateAsync(connectionSettings.BaudRate);
-                await device.SetDataCharacteristicsAsync(connectionSettings.WordLength, connectionSettings.StopBits, connectionSettings.Parity);
-                await device.SetFlowControlAsync(connectionSettings.FlowControl, connectionSettings.XOn, connectionSettings.XOff);
+                await device.SetConnectionSettings(connectionSettings);
 
                 WriteToLog("Connection settings succesfully applied: {0}.", connectionSettings);
             }
